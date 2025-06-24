@@ -44,9 +44,22 @@ const AppLayout = () => {
         </Title>
         <Menu items={menuItems} defaultSelectedKeys={["/"]} onClick={menuItemClick} style={{ border: 0 }} />
       </Sider>
-      <Content style={{ padding: 20, maxWidth: 1200, margin: "0 auto" }}>
-        <Outlet />
-      </Content>
+      <Layout>
+        <Layout.Header style={{ padding: 0, background: "#fff", boxShadow: "0 1px 4px rgba(0,21,41,.08)" }} />
+        <Content style={{ margin: "24px 16px 0" }}>
+          <div
+            style={{
+              borderRadius: 8,
+              minHeight: 280,
+              maxWidth: 1280,
+              margin: "auto",
+            }}
+          >
+            <Outlet />
+          </div>
+        </Content>
+        <Footer style={{ textAlign: "center" }}>Footer</Footer>
+      </Layout>
     </Layout>
   );
 };

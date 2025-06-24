@@ -4,7 +4,7 @@ import type { ProductFilters } from "../types";
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const getProducts = async (filters?: ProductFilters) => {
-  await delay(1000);
+  await delay(500);
 
   let filteredProducts = [...mockProducts];
 
@@ -19,6 +19,19 @@ export const getProducts = async (filters?: ProductFilters) => {
 
   return {
     data: filteredProducts,
+    message: "Ok",
+    statusCode: 200,
+  };
+};
+
+export const getProductById = async (id: string) => {
+  await delay(250);
+  const product = mockProducts.find((p) => p.id === id);
+  if (!product) {
+    throw new Error("Product not found");
+  }
+  return {
+    data: product,
     message: "Ok",
     statusCode: 200,
   };
