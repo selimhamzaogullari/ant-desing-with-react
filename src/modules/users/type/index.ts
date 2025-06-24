@@ -9,6 +9,7 @@ export interface User {
 
 export interface UserInitialState {
   users: User[] | [];
+  activeUser: User | null;
   loading: boolean;
   error: null | string;
 }

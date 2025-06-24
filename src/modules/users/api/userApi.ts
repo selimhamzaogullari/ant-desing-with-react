@@ -11,3 +11,16 @@ export const getUsers = async () => {
     statusCode: 200,
   };
 };
+
+export const getUserById = async (id: string) => {
+  await delay(250);
+  const user = mockUsers.find((p) => p.id === id);
+  if (!user) {
+    throw new Error("Product not found");
+  }
+  return {
+    data: user,
+    message: "Ok",
+    statusCode: 200,
+  };
+};
