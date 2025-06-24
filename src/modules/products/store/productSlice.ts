@@ -27,6 +27,7 @@ const productSlice = createSlice({
       .addCase(fetchProducts.fulfilled, (state, action) => {
         state.products = [];
         state.loading = false;
+        state.error = null;
       })
       .addCase(fetchProducts.rejected, (state, action) => {
         (state.loading = false), (state.error = action.error.message || "Error");

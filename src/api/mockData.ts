@@ -55,6 +55,7 @@ export const mockUsers: User[] = [
     firstName: "John",
     lastName: "Doe",
     email: "john.doe@gmail.com",
+    phone: "+90 555 555 55 55",
     avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100",
   },
   {
@@ -62,6 +63,7 @@ export const mockUsers: User[] = [
     firstName: "Jane",
     lastName: "Smith",
     email: "jane.smith@gmail.com",
+    phone: "+90 555 555 55 55",
     avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100",
   },
   {
@@ -69,6 +71,7 @@ export const mockUsers: User[] = [
     firstName: "Mike",
     lastName: "Johnson",
     email: "mike.johnson@gmail.com",
+    phone: "+90 555 555 55 55",
     avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100",
   },
   {
@@ -76,6 +79,7 @@ export const mockUsers: User[] = [
     firstName: "Sarah",
     lastName: "Wilson",
     email: "sarah.wilson@gmail.com",
+    phone: "+90 555 555 55 55",
     avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100",
   },
   {
@@ -83,6 +87,7 @@ export const mockUsers: User[] = [
     firstName: "David",
     lastName: "Brown",
     email: "david.brown@gmail.com",
+    phone: "+90 555 555 55 55",
     avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100",
   },
 ];

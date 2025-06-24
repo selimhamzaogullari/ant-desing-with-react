@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import "./App.css";
 import AppLayout from "./components/AppLayout";
 import Dashboard from "./pages/Dashboard";
 import Products from "./pages/Products";
@@ -7,6 +6,7 @@ import Users from "./pages/Users";
 import { store } from "./store";
 import { Provider } from "react-redux";
 import ProductDetail from "./modules/products/pages/ProductDetail";
+import UserDetail from "./modules/users/pages/UserDetail";
 
 function App() {
   return (
@@ -18,6 +18,7 @@ function App() {
             <Route path="products" element={<Products />} />
             <Route path="users" element={<Users />} />
             <Route path="products/:id" element={<ProductDetail />} />
+            <Route path="users/:id" element={<UserDetail />} />
           </Route>
         </Routes>
       </Router>
