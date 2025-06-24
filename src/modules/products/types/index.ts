@@ -9,6 +9,12 @@ export interface Product {
 
 export interface ProductInitialState {
   products: Product[] | [];
+  filters: ProductFilters;
   loading: boolean;
   error: null | string;
+}
+
+export interface ProductFilters {
+  search?: string;
+  category?: string;
 }

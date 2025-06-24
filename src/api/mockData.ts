@@ -40,12 +40,12 @@ export const mockProducts: Product[] = [
   },
   {
     id: "5",
-    name: "iPhone 16e",
+    name: "Racket",
     description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. ",
     price: 999,
-    category: "Electronics",
+    category: "Sports",
     image:
-      "https://images.unsplash.com/photo-1710023038502-ba80a70a9f53?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aXBob25lJTIwMTUlMjBwcm98ZW58MHx8MHx8fDA%3D",
+      "https://images.unsplash.com/photo-1617883861744-13b534e3b928?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cmFja2V0fGVufDB8fDB8fHww",
   },
 ];
 
@@ -91,3 +91,5 @@ export const mockUsers: User[] = [
     avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100",
   },
 ];
+
+export const categories = ["Electronics", "Sports", "Books", "Games"];

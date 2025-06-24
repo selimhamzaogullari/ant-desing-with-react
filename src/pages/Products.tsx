@@ -9,13 +9,15 @@ import ProductCard from "../modules/products/components/ProductCard";
 import NoData from "../components/NoData";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
+import FilterProduct from "../modules/products/components/FilterProduct";
 
 const Products = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { products, loading, error } = useSelector((state: RootState) => state.products);
+  const { products, filters, loading, error } = useSelector((state: RootState) => state.products);
+
   useEffect(() => {
-    dispatch(fetchProducts());
-  }, []);
+    dispatch(fetchProducts(filters));
+  }, [filters]);
 
   const Content = () => {
     if (loading) return <Loading />;
@@ -24,7 +26,7 @@ const Products = () => {
       return (
         <Row gutter={[24, 24]}>
           {products.map((product: Product) => (
-            <ProductCard product={product} />
+            <ProductCard product={product} key={product.id} />
           ))}
         </Row>
       );
@@ -46,7 +48,7 @@ const Products = () => {
           </Button>
         </Flex>
       </Flex>
-      <Flex gap="small">Filter</Flex>
+      <FilterProduct />
       <Content />
     </>
   );

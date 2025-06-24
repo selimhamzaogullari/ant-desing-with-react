@@ -1,22 +1,27 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import { getProducts } from "../api/productApi";
-import type { ProductInitialState } from "../types";
+import type { ProductFilters, ProductInitialState } from "../types";
 
 const initialState: ProductInitialState = {
   products: [],
+  filters: {},
   loading: false,
   error: null,
 };
 
-export const fetchProducts = createAsyncThunk("api/fetchProducts", async () => {
-  const response = await getProducts();
+export const fetchProducts = createAsyncThunk("api/fetchProducts", async (filters?: ProductFilters) => {
+  const response = await getProducts(filters);
   return response.data;
 });
 
 const productSlice = createSlice({
   name: "productSlice",
   initialState,
-  reducers: {},
+  reducers: {
+    setFilters: (state, action: PayloadAction<ProductFilters>) => {
+      state.filters = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       // Products
@@ -25,7 +30,7 @@ const productSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
-        state.products = [];
+        state.products = action.payload;
         state.loading = false;
         state.error = null;
       })
@@ -34,5 +39,7 @@ const productSlice = createSlice({
       });
   },
 });
+
+export const { setFilters } = productSlice.actions;
 
 export default productSlice.reducer;
