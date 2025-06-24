@@ -19,12 +19,17 @@ const productSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      // Products
       .addCase(fetchProducts.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
-        state.products = action.payload;
+        state.products = [];
+        state.loading = false;
+      })
+      .addCase(fetchProducts.rejected, (state, action) => {
+        (state.loading = false), (state.error = action.error.message || "Error");
       });
   },
 });

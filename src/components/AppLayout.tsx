@@ -26,7 +26,7 @@ const AppLayout = () => {
     },
   ];
 
-  const menuItemClick = ({ key }) => {
+  const menuItemClick = ({ key }: { key: string }) => {
     navigate(key);
   };
 
@@ -39,12 +39,12 @@ const AppLayout = () => {
           boxShadow: "2px 0 8px 0 rgba(29,35,41,.05)",
         }}
       >
-        <Title level={4} style={{ marginTop: 10, marginBottom: 20, color: "#1890ff", textAlign: "center" }}>
+        <Title level={4} style={{ marginTop: 20, marginBottom: 20, color: "#1890ff", textAlign: "center" }}>
           Menu
         </Title>
         <Menu items={menuItems} defaultSelectedKeys={["/"]} onClick={menuItemClick} style={{ border: 0 }} />
       </Sider>
-      <Content style={{ padding: 20 }}>
+      <Content style={{ padding: 20, maxWidth: 1200, margin: "0 auto" }}>
         <Outlet />
       </Content>
     </Layout>

@@ -6,6 +6,7 @@ import Products from "./pages/Products";
 import Users from "./pages/Users";
 import { store } from "./store";
 import { Provider } from "react-redux";
+import ProductDetail from "./modules/products/pages/ProductDetail";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route index element={<Dashboard />} />
             <Route path="products" element={<Products />} />
             <Route path="users" element={<Users />} />
+            <Route path="products/:id" element={<ProductDetail />} />
           </Route>
         </Routes>
       </Router>
