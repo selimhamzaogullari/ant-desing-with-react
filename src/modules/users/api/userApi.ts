@@ -1,40 +1,43 @@
 import { mockUsers } from "../../../api/mockData";
-// Simulate API delay
+import type { User } from "../type";
+
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-export const getUsers = async () => {
-  await delay(1000);
+class UserService {
+  private users: User[] = [...mockUsers];
 
-  return {
-    data: mockUsers,
-    message: "Ok",
-    statusCode: 200,
-  };
-};
+  async getUsers() {
+    await delay(500);
 
-export const getUserById = async (id: string) => {
-  await delay(250);
-  const user = mockUsers.find((p) => p.id === id);
-  if (!user) {
-    throw new Error("Product not found");
+    return {
+      data: [...this.users],
+      message: "Ok",
+      statusCode: 200,
+    };
   }
-  return {
-    data: user,
-    message: "Ok",
-    statusCode: 200,
-  };
-};
+  async getUserById(id: string) {
+    await delay(250);
+    const user = this.users.find((p) => p.id === id);
+    if (!user) throw new Error("User not found");
 
-export const removeUser = async (id: string) => {
-  await delay(200);
-  const index = mockUsers.findIndex((p) => p.id === id);
-  if (index < 0) {
-    throw new Error("User not found");
+    return {
+      data: user,
+      message: "Ok",
+      statusCode: 200,
+    };
   }
-  mockUsers.splice(index, 1);
-  return {
-    data: undefined,
-    message: "Ok",
-    statusCode: 200,
-  };
-};
+
+  async removeUser(id: string) {
+    await delay(200);
+    const index = this.users.findIndex((p) => p.id === id);
+    if (index === -1) throw new Error("User not found");
+    this.users.splice(index, 1);
+    return {
+      data: undefined,
+      message: "Ok",
+      statusCode: 200,
+    };
+  }
+}
+
+export const userApi = new UserService();

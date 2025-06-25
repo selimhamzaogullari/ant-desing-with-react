@@ -1,52 +1,54 @@
 import { mockProducts } from "../../../api/mockData";
-import type { ProductFilters } from "../types";
-// Simulate API delay
+import type { Product, ProductFilters } from "../types";
+
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-export const getProducts = async (filters?: ProductFilters) => {
-  await delay(500);
+class ProductService {
+  private products: Product[] = [...mockProducts]; // değiştirilebilir internal state
 
-  let filteredProducts = [...mockProducts];
+  async getProducts(filters?: ProductFilters) {
+    await delay(500);
 
-  if (filters && Object.keys(filters).length !== 0) {
-    if (filters.search) {
-      filteredProducts = filteredProducts.filter((product) => product.name.toLowerCase().includes(filters.search?.toLowerCase()));
+    let filtered = [...this.products];
+
+    if (filters?.search) {
+      filtered = filtered.filter((p) => p.name.toLowerCase().includes(filters.search.toLowerCase()));
     }
-    if (filters.category) {
-      filteredProducts = filteredProducts.filter((product) => product.category === filters.category);
+
+    if (filters?.category) {
+      filtered = filtered.filter((p) => p.category === filters.category);
     }
+
+    return {
+      data: filtered,
+      message: "Ok",
+      statusCode: 200,
+    };
+  }
+  async getProductById(id: string) {
+    await delay(250);
+    const product = this.products.find((p) => p.id === id);
+    if (!product) throw new Error("Product not found");
+
+    return {
+      data: product,
+      message: "Ok",
+      statusCode: 200,
+    };
   }
 
-  return {
-    data: filteredProducts,
-    message: "Ok",
-    statusCode: 200,
-  };
-};
+  async removeProduct(id: string) {
+    await delay(200);
+    const index = this.products.findIndex((p) => p.id === id);
+    if (index === -1) throw new Error("Product not found");
+    this.products.splice(index, 1);
 
-export const getProductById = async (id: string) => {
-  await delay(250);
-  const product = mockProducts.find((p) => p.id === id);
-  if (!product) {
-    throw new Error("Product not found");
+    return {
+      data: undefined,
+      message: "Ok",
+      statusCode: 200,
+    };
   }
-  return {
-    data: product,
-    message: "Ok",
-    statusCode: 200,
-  };
-};
+}
 
-export const removeProduct = async (id: string) => {
-  await delay(200);
-  const index = mockProducts.findIndex((p) => p.id === id);
-  if (index < 0) {
-    throw new Error("Product not found");
-  }
-  mockProducts.splice(index, 1);
-  return {
-    data: undefined,
-    message: "Ok",
-    statusCode: 200,
-  };
-};
+export const productApi = new ProductService();

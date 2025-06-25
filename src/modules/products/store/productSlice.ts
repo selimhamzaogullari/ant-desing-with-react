@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import { getProductById, getProducts, removeProduct } from "../api/productApi";
 import type { ProductFilters, ProductInitialState } from "../types";
+import { productApi } from "../api/productApi";
 
 const initialState: ProductInitialState = {
   products: [],
@@ -11,17 +11,17 @@ const initialState: ProductInitialState = {
 };
 
 export const fetchProducts = createAsyncThunk("api/fetchProducts", async (filters?: ProductFilters) => {
-  const response = await getProducts(filters);
+  const response = await productApi.getProducts(filters);
   return response.data;
 });
 
 export const fetchProductById = createAsyncThunk("api/fetchProductById", async (id: string) => {
-  const response = await getProductById(id);
+  const response = await productApi.getProductById(id);
   return response.data;
 });
 
 export const deleteProduct = createAsyncThunk("api/deleteProduct", async (id: string) => {
-  const response = await removeProduct(id);
+  const response = await productApi.removeProduct(id);
   return response.data;
 });
 
