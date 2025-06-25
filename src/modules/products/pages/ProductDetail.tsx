@@ -1,24 +1,32 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import type { AppDispatch, RootState } from "../../../store";
 import { useEffect } from "react";
-import { fetchProductById } from "../store/productSlice";
+import { deleteProduct, fetchProductById } from "../store/productSlice";
 import Error from "../../../components/Error";
-import { Space, Image, Typography, Button, Popconfirm, message, Flex, Tag, Descriptions } from "antd";
+import { Space, Image, Typography, Button, Popconfirm, message, Tag } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 import Loading from "../../../components/Loading";
 
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
   const { activeProduct, loading, error } = useSelector((state: RootState) => state.products);
   const [messageApi, contextHolder] = message.useMessage();
+
   useEffect(() => {
     dispatch(fetchProductById(id));
   }, [id]);
 
-  const deleteProduct = () => {
-    messageApi.success("Deleted Product");
+  const removeProduct = async () => {
+    try {
+      await dispatch(deleteProduct(id)).unwrap();
+      // messageApi.success("Deleted Product");
+      navigate("/products");
+    } catch (e) {
+      messageApi.error("Failed to delete product");
+    }
   };
 
   const editProduct = () => {
@@ -53,7 +61,7 @@ const ProductDetail = () => {
                   title="Delete the product"
                   description="Are you sure to delete this product?"
                   placement="bottom"
-                  onConfirm={deleteProduct}
+                  onConfirm={removeProduct}
                   okText="Yes"
                   cancelText="No"
                 >

@@ -22,7 +22,7 @@ const UserDetail = () => {
   };
 
   const editUser = () => {
-    console.log("Edit Product");
+    console.log("Edit user");
   };
   if (loading) return <Loading />;
   if (error) return <Error />;
@@ -47,8 +47,8 @@ const UserDetail = () => {
                 Edit
               </Button>
               <Popconfirm
-                title="Delete the product"
-                description="Are you sure to delete this product?"
+                title="Delete the user"
+                description="Are you sure to delete this user?"
                 placement="bottom"
                 onConfirm={deleteUser}
                 okText="Yes"

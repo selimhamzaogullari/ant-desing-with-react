@@ -36,3 +36,17 @@ export const getProductById = async (id: string) => {
     statusCode: 200,
   };
 };
+
+export const removeProduct = async (id: string) => {
+  await delay(200);
+  const product = mockProducts.find((p) => p.id === id);
+  if (product == undefined) {
+    throw new Error("Product not found");
+  }
+  mockProducts.splice(product.id, 1);
+  return {
+    data: undefined,
+    message: "Ok",
+    statusCode: 200,
+  };
+};

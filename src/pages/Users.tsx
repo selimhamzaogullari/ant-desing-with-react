@@ -17,8 +17,6 @@ const Users = () => {
     dispatch(fetchUsers());
   }, []);
 
-  console.log(users);
-
   const Content = () => {
     if (loading) return <Loading />;
     else if (error) return <Error />;
