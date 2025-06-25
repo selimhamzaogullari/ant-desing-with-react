@@ -26,7 +26,7 @@ const Products = () => {
     else if (error) return <Error />;
     else if (products.length > 0)
       return (
-        <Row gutter={[24, 24]}>
+        <Row gutter={[24, 24]} style={{ margin: 0 }}>
           {products.map((product: Product) => (
             <ProductCard product={product} key={product.id} />
           ))}

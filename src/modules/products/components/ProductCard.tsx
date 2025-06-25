@@ -1,5 +1,5 @@
 import { HeartOutlined, EditOutlined, DeleteOutlined, HeartFilled } from "@ant-design/icons";
-import { Col, Card, Button } from "antd";
+import { Col, Card, Button, Image } from "antd";
 import type { Product } from "../types";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,7 +20,11 @@ const ProductCard = ({ product }: ProductCardProps) => {
       <Card
         hoverable
         style={{ minWidth: 300, maxWidth: 600 }}
-        cover={<img alt="example" src={product.image} onClick={() => navigate(`/products/${product.id}`)} />}
+        cover={
+          <div style={{ height: 400, overflow: "hidden" }} onClick={() => navigate(`/products/${product.id}`)}>
+            <Image width="100%" height="100%" style={{ objectFit: "cover", objectPosition: "center" }} src={product.image} alt={product.name} />
+          </div>
+        }
         actions={[
           <Button
             type="text"

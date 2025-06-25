@@ -34,7 +34,7 @@ const AppLayout = () => {
   };
 
   return (
-    <Layout style={{ minHeight: "100vh", minWidth: "100vw" }}>
+    <Layout style={{ minHeight: "100vh", minWidth: "calc(100vw - 20px)" }}>
       <Sider
         trigger={null}
         style={{
@@ -61,7 +61,9 @@ const AppLayout = () => {
             <Outlet />
           </div>
         </Content>
-        <Footer style={{ padding: 20, background: "#fff", textAlign: "center", boxShadow: "0 1px 4px rgba(0,21,41,.08)" }}>Footer</Footer>
+        <Footer style={{ padding: 20, marginTop: 20, background: "#fff", textAlign: "center", boxShadow: "0 1px 4px rgba(0,21,41,.08)" }}>
+          Footer
+        </Footer>
       </Layout>
     </Layout>
   );
