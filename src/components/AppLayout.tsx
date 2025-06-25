@@ -1,6 +1,6 @@
 import { HomeOutlined, ProductOutlined, UserOutlined } from "@ant-design/icons";
 import { Layout, Typography, Menu } from "antd";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import type { MenuProps } from "antd";
 
 const { Content, Footer, Sider, Header } = Layout;
@@ -8,6 +8,9 @@ const { Title } = Typography;
 
 const AppLayout = () => {
   let navigate = useNavigate();
+  const location = useLocation();
+  const activeMenu = location.pathname.includes("users") ? "/users" : location.pathname.includes("products") ? "/products" : "/";
+  console.log(activeMenu);
   const menuItems: MenuProps["items"] = [
     {
       key: "/",
@@ -42,7 +45,7 @@ const AppLayout = () => {
         <Title level={4} style={{ marginTop: 20, marginBottom: 20, color: "#1890ff", textAlign: "center" }}>
           Menu
         </Title>
-        <Menu items={menuItems} defaultSelectedKeys={["/"]} onClick={menuItemClick} style={{ border: 0 }} />
+        <Menu items={menuItems} defaultSelectedKeys={[activeMenu]} onClick={menuItemClick} style={{ border: 0 }} />
       </Sider>
       <Layout>
         <Header style={{ padding: 0, background: "#fff", textAlign: "center", boxShadow: "0 1px 4px rgba(0,21,41,.08)" }}>Header</Header>
