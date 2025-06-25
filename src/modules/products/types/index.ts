@@ -13,6 +13,7 @@ export interface Product extends CreateProduct {
 export interface ProductInitialState {
   products: Product[] | [];
   activeProduct: Product | null;
+  favorites: Array<any>;
   filters: ProductFilters;
   loading: boolean;
   error: null | string;

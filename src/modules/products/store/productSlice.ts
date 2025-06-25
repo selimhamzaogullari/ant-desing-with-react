@@ -5,6 +5,7 @@ import { productApi } from "../api/productApi";
 const initialState: ProductInitialState = {
   products: [],
   activeProduct: null,
+  favorites: [],
   filters: {},
   loading: false,
   error: null,
@@ -41,6 +42,11 @@ const productSlice = createSlice({
   reducers: {
     setFilters: (state, action: PayloadAction<ProductFilters>) => {
       state.filters = action.payload;
+    },
+    setFavorites: (state, action: PayloadAction<string>) => {
+      const index = state.favorites.findIndex((f) => f === action.payload);
+      if (index === -1) state.favorites.push(action.payload);
+      else state.favorites.splice(index, 1);
     },
   },
   extraReducers: (builder) => {
@@ -109,6 +115,6 @@ const productSlice = createSlice({
   },
 });
 
-export const { setFilters } = productSlice.actions;
+export const { setFilters, setFavorites } = productSlice.actions;
 
 export default productSlice.reducer;
