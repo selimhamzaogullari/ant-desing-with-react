@@ -39,11 +39,11 @@ export const getProductById = async (id: string) => {
 
 export const removeProduct = async (id: string) => {
   await delay(200);
-  const product = mockProducts.find((p) => p.id === id);
-  if (product == undefined) {
+  const index = mockProducts.findIndex((p) => p.id === id);
+  if (index < 0) {
     throw new Error("Product not found");
   }
-  mockProducts.splice(product.id, 1);
+  mockProducts.splice(index, 1);
   return {
     data: undefined,
     message: "Ok",

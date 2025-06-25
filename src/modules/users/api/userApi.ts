@@ -24,3 +24,17 @@ export const getUserById = async (id: string) => {
     statusCode: 200,
   };
 };
+
+export const removeUser = async (id: string) => {
+  await delay(200);
+  const index = mockUsers.findIndex((p) => p.id === id);
+  if (index < 0) {
+    throw new Error("User not found");
+  }
+  mockUsers.splice(index, 1);
+  return {
+    data: undefined,
+    message: "Ok",
+    statusCode: 200,
+  };
+};

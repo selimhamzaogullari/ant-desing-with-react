@@ -24,7 +24,7 @@ const Users = () => {
       return (
         <Row gutter={[24, 24]}>
           {users.map((user: User) => (
-            <UserCard user={user} />
+            <UserCard user={user} key={user.id} />
           ))}
         </Row>
       );

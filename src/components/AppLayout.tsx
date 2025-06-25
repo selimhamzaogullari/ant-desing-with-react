@@ -3,7 +3,7 @@ import { Layout, Typography, Menu } from "antd";
 import { Outlet, useNavigate } from "react-router-dom";
 import type { MenuProps } from "antd";
 
-const { Content, Footer, Sider } = Layout;
+const { Content, Footer, Sider, Header } = Layout;
 const { Title } = Typography;
 
 const AppLayout = () => {
@@ -45,7 +45,7 @@ const AppLayout = () => {
         <Menu items={menuItems} defaultSelectedKeys={["/"]} onClick={menuItemClick} style={{ border: 0 }} />
       </Sider>
       <Layout>
-        <Layout.Header style={{ padding: 0, background: "#fff", boxShadow: "0 1px 4px rgba(0,21,41,.08)" }} />
+        <Header style={{ padding: 0, background: "#fff", textAlign: "center", boxShadow: "0 1px 4px rgba(0,21,41,.08)" }}>Header</Header>
         <Content style={{ margin: "24px 16px 0" }}>
           <div
             style={{
