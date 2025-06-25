@@ -34,7 +34,7 @@ const UserDetail = () => {
   if (error) return <Error />;
   else if (activeUser)
     return (
-      <div style={{ width: 500, padding: 20, borderRadius: 4, border: "2px solid #efefef", margin: "auto" }}>
+      <div style={{ width: 500, padding: 20, borderRadius: 4, boxShadow: "0 1px 14px rgba(0,21,41,.1)", margin: "auto", background: "#fff" }}>
         <Space direction="vertical" size={24} style={{ width: "100%" }}>
           <Space align="center">
             <Avatar src={activeUser.avatar} size={64} />

@@ -10,10 +10,12 @@ import NoData from "../components/NoData";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
 import FilterProduct from "../modules/products/components/FilterProduct";
+import { useNavigate } from "react-router-dom";
 
 const Products = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { products, filters, loading, error } = useSelector((state: RootState) => state.products);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchProducts(filters));
@@ -42,8 +44,10 @@ const Products = () => {
           Products
         </Typography.Title>
         <Flex gap="small">
-          <Button icon={<ReloadOutlined />}>Refresh</Button>
-          <Button icon={<PlusOutlined />} type="primary">
+          <Button icon={<ReloadOutlined />} onClick={() => dispatch(fetchProducts(filters))}>
+            Refresh
+          </Button>
+          <Button icon={<PlusOutlined />} type="primary" onClick={() => navigate("/products/create")}>
             Add Product
           </Button>
         </Flex>

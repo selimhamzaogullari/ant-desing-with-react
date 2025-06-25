@@ -1,10 +1,13 @@
-export interface Product {
-  id: string;
+export interface CreateProduct {
   name: string;
   price: number;
   description: string;
   category: "Electronics" | "Fashions" | "Sports";
   image: string;
+}
+
+export interface Product extends CreateProduct {
+  id: string;
 }
 
 export interface ProductInitialState {

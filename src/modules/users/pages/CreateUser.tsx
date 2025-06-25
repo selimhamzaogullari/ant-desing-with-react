@@ -1,0 +1,77 @@
+import { Button, Form, Input, Space, Typography, type FormProps } from "antd";
+import type { User } from "../type";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import type { AppDispatch, RootState } from "../../../store";
+import { createUser } from "../store/userSlice";
+
+const CreateUser = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
+
+  const { loading } = useSelector((state: RootState) => state.users);
+
+  const onFinish: FormProps<User>["onFinish"] = async (values) => {
+    try {
+      await dispatch(createUser(values)).unwrap();
+      navigate("/users");
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const onFinishFailed: FormProps<User>["onFinishFailed"] = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  };
+
+  return (
+    <div style={{ width: 500, padding: 20, borderRadius: 4, boxShadow: "0 1px 14px rgba(0,21,41,.1)", margin: "auto", background: "#fff" }}>
+      <Typography.Title level={3} style={{ textAlign: "center", marginBottom: 40 }}>
+        Add User
+      </Typography.Title>
+      <Form
+        name="basic"
+        labelCol={{ span: 8 }}
+        wrapperCol={{ span: 16 }}
+        style={{ maxWidth: 600 }}
+        initialValues={{ remember: true }}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        autoComplete="off"
+      >
+        <Form.Item<User> label="First Name" name="firstName" rules={[{ required: true, message: "Please input your firstName!" }]}>
+          <Input />
+        </Form.Item>
+
+        <Form.Item<User> label="Last Name" name="lastName" rules={[{ required: true, message: "Please input your lastName!" }]}>
+          <Input.Password />
+        </Form.Item>
+
+        <Form.Item<User> label="Email" name="email" rules={[{ required: true, message: "Please input your email!", type: "email" }]}>
+          <Input />
+        </Form.Item>
+
+        <Form.Item<User> label="Phone Number" name="phone" rules={[{ required: true, message: "Please input your phone number!" }]}>
+          <Input />
+        </Form.Item>
+
+        <Form.Item<User> label="Avatar" name="avatar" rules={[{ required: true, message: "Please input your avatar url!" }]}>
+          <Input />
+        </Form.Item>
+
+        <Form.Item label={null}>
+          <Space>
+            <Button type="primary" disabled={loading} htmlType="submit">
+              Submit
+            </Button>
+            <Button disabled={loading} onClick={() => navigate("/users")}>
+              Cancel
+            </Button>
+          </Space>
+        </Form.Item>
+      </Form>
+    </div>
+  );
+};
+
+export default CreateUser;

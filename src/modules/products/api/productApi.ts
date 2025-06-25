@@ -1,5 +1,5 @@
 import { mockProducts } from "../../../api/mockData";
-import type { Product, ProductFilters } from "../types";
+import type { CreateProduct, Product, ProductFilters } from "../types";
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -45,6 +45,20 @@ class ProductService {
 
     return {
       data: undefined,
+      message: "Ok",
+      statusCode: 200,
+    };
+  }
+
+  async addProduct(newProduct: CreateProduct) {
+    await delay(200);
+    const newProductData = {
+      id: Date.now().toString(),
+      ...newProduct,
+    };
+    this.products.push(newProductData);
+    return {
+      data: newProductData,
       message: "Ok",
       statusCode: 200,
     };

@@ -9,10 +9,13 @@ import Error from "../components/Error";
 import type { User } from "../modules/users/type";
 import UserCard from "../modules/users/components/UserCard";
 import { fetchUsers } from "../modules/users/store/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const Users = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { users, loading, error } = useSelector((state: RootState) => state.users);
+  const navigate = useNavigate();
+
   useEffect(() => {
     dispatch(fetchUsers());
   }, []);
@@ -22,7 +25,7 @@ const Users = () => {
     else if (error) return <Error />;
     else if (users.length > 0)
       return (
-        <Row gutter={[24, 24]}>
+        <Row gutter={[24, 24]} style={{ marginTop: 20 }}>
           {users.map((user: User) => (
             <UserCard user={user} key={user.id} />
           ))}
@@ -40,8 +43,10 @@ const Users = () => {
           Users
         </Typography.Title>
         <Flex gap="small">
-          <Button icon={<ReloadOutlined />}>Refresh</Button>
-          <Button icon={<PlusOutlined />} type="primary">
+          <Button icon={<ReloadOutlined />} onClick={() => dispatch(fetchUsers())}>
+            Refresh
+          </Button>
+          <Button icon={<PlusOutlined />} type="primary" onClick={() => navigate("/users/create")}>
             Add User
           </Button>
         </Flex>

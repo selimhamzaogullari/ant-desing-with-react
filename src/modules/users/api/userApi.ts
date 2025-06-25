@@ -1,5 +1,5 @@
 import { mockUsers } from "../../../api/mockData";
-import type { User } from "../type";
+import type { CreateUser, User } from "../type";
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -34,6 +34,20 @@ class UserService {
     this.users.splice(index, 1);
     return {
       data: undefined,
+      message: "Ok",
+      statusCode: 200,
+    };
+  }
+
+  async addUser(newUser: CreateUser) {
+    await delay(200);
+    const newUserData = {
+      id: Date.now().toString(),
+      ...newUser,
+    };
+    this.users.push(newUserData);
+    return {
+      data: newUserData,
       message: "Ok",
       statusCode: 200,
     };

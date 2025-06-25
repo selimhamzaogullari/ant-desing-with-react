@@ -1,10 +1,13 @@
-export interface User {
-  id: string;
+export interface CreateUser {
   firstName: string;
   lastName: string;
   email: string;
   phone: string;
   avatar: string;
+}
+
+export interface User extends CreateUser {
+  id: string;
 }
 
 export interface UserInitialState {
