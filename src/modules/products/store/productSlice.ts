@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { CreateProduct, ProductFilters, ProductInitialState } from "../types";
+import type { CreateProduct, ProductFilters, ProductInitialState, Product } from "../types";
 import { productApi } from "../api/productApi";
 
 const initialState: ProductInitialState = {
@@ -27,6 +27,11 @@ export const deleteProduct = createAsyncThunk("api/deleteProduct", async (id: st
 
 export const createProduct = createAsyncThunk("api/createProduct", async (newProduct: CreateProduct) => {
   const response = await productApi.addProduct(newProduct);
+  return response.data;
+});
+
+export const updateProduct = createAsyncThunk("api/updateProduct", async (productData: Product) => {
+  const response = await productApi.editProduct(productData);
   return response.data;
 });
 
@@ -87,6 +92,18 @@ const productSlice = createSlice({
         state.error = null;
       })
       .addCase(createProduct.rejected, (state, action) => {
+        (state.loading = false), (state.error = action.error.message || "Error");
+      })
+      // Update Product
+      .addCase(updateProduct.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateProduct.fulfilled, (state) => {
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(updateProduct.rejected, (state, action) => {
         (state.loading = false), (state.error = action.error.message || "Error");
       });
   },

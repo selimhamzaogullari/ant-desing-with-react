@@ -63,6 +63,18 @@ class ProductService {
       statusCode: 200,
     };
   }
+
+  async editProduct(editProduct: Product) {
+    await delay(200);
+    const index = this.products.findIndex((p) => p.id === editProduct.id);
+    if (index === -1) throw new Error("Product not found");
+    this.products[index] = editProduct;
+    return {
+      data: editProduct,
+      message: "Ok",
+      statusCode: 200,
+    };
+  }
 }
 
 export const productApi = new ProductService();

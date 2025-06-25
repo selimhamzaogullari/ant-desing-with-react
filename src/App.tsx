@@ -1,14 +1,15 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AppLayout from "./components/AppLayout";
-import Dashboard from "./pages/Dashboard";
-import Products from "./pages/Products";
-import Users from "./pages/Users";
+import Dashboard from "./pages/DashboardPage";
+import Products from "./pages/ProductsPage";
+import Users from "./pages/UsersPage";
 import { store } from "./store";
 import { Provider } from "react-redux";
-import ProductDetail from "./modules/products/pages/ProductDetail";
-import UserDetail from "./modules/users/pages/UserDetail";
-import CreateUser from "./modules/users/pages/CreateUser";
-import CreateProduct from "./modules/products/pages/CreateProduct";
+import ProductDetail from "./modules/products/pages/ProductDetailPage";
+import UserDetail from "./modules/users/pages/UserDetailPage";
+import CreateUser from "./modules/users/pages/CreateUserPage";
+import CreateProduct from "./modules/products/pages/CreateProductPage";
+import EditProduct from "./modules/products/pages/EditProductPage";
 
 function App() {
   return (
@@ -21,8 +22,9 @@ function App() {
             <Route path="users" element={<Users />} />
             <Route path="products/:id" element={<ProductDetail />} />
             <Route path="users/:id" element={<UserDetail />} />
-            <Route path="users/create" element={<CreateUser />} />
             <Route path="products/create" element={<CreateProduct />} />
+            <Route path="users/create" element={<CreateUser />} />
+            <Route path="products/edit/:id" element={<EditProduct />} />
           </Route>
         </Routes>
       </Router>

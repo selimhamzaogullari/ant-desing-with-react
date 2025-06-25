@@ -58,7 +58,7 @@ const AppLayout = () => {
             <Outlet />
           </div>
         </Content>
-        <Footer style={{ textAlign: "center" }}>Footer</Footer>
+        <Footer style={{ padding: 20, background: "#fff", textAlign: "center", boxShadow: "0 1px 4px rgba(0,21,41,.08)" }}>Footer</Footer>
       </Layout>
     </Layout>
   );

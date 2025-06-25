@@ -12,14 +12,13 @@ const ProductCard = ({ product }: ProductCardProps) => {
   return (
     <Col sm={24} lg={12} xl={8} xxl={8} key={product.id}>
       <Card
+        hoverable
         style={{ minWidth: 300, maxWidth: 600 }}
-        cover={<img alt="example" src={product.image} />}
+        cover={<img alt="example" src={product.image} onClick={() => navigate(`/products/${product.id}`)} />}
         actions={[
           <Button type="text" variant="text" block icon={<HeartOutlined />} />,
-          <Button type="text" variant="text" block icon={<EditOutlined />} />,
-          <Button type="text" variant="text" block icon={<DeleteOutlined />} />,
+          <Button type="text" variant="text" block icon={<EditOutlined />} onClick={() => navigate(`/products/edit/${product.id}`)} />,
         ]}
-        onClick={() => navigate(`/products/${product.id}`)}
       >
         <Card.Meta title={product.name} description={product.description} />
       </Card>

@@ -27,9 +27,6 @@ const ProductDetail = () => {
     }
   };
 
-  const editProduct = () => {
-    console.log("Edit Product");
-  };
   if (loading) return <Loading />;
   if (error) return <Error />;
   else if (activeProduct)
@@ -50,7 +47,7 @@ const ProductDetail = () => {
               {activeProduct.name}
             </Typography.Title>
             <Space>
-              <Button type="primary" icon={<EditOutlined />} onClick={editProduct}>
+              <Button type="primary" icon={<EditOutlined />} onClick={() => navigate(`/products/edit/${id}`)}>
                 Edit
               </Button>
               <Popconfirm
