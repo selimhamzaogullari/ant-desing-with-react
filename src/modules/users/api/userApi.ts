@@ -52,6 +52,18 @@ class UserService {
       statusCode: 200,
     };
   }
+
+  async editUser(editUser: User) {
+    await delay(200);
+    const index = this.users.findIndex((p) => p.id === editUser.id);
+    if (index === -1) throw new Error("Product not found");
+    this.users[index] = editUser;
+    return {
+      data: editUser,
+      message: "Ok",
+      statusCode: 200,
+    };
+  }
 }
 
 export const userApi = new UserService();

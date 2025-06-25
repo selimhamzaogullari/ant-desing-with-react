@@ -27,9 +27,6 @@ const UserDetail = () => {
     }
   };
 
-  const editUser = () => {
-    console.log("Edit user");
-  };
   if (loading) return <Loading />;
   if (error) return <Error />;
   else if (activeUser)
@@ -47,7 +44,7 @@ const UserDetail = () => {
             <Descriptions.Item label="Phone">{activeUser.phone}</Descriptions.Item>
           </Descriptions>
           <Space>
-            <Button type="primary" icon={<EditOutlined />} onClick={editUser}>
+            <Button type="primary" icon={<EditOutlined />} onClick={() => navigate(`/users/edit/${id}`)}>
               Edit
             </Button>
             <Popconfirm

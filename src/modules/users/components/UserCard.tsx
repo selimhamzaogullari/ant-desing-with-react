@@ -14,13 +14,13 @@ const UserCard = ({ user }: UserCardProps) => {
       <Card
         style={{ minWidth: 300, maxWidth: 400 }}
         actions={[
-          <Button type="text" variant="text" block icon={<EditOutlined />} />,
-          <Button type="text" variant="text" block icon={<DeleteOutlined />} />,
+          <Button type="text" variant="text" block onClick={() => navigate(`/users/edit/${user.id}`)}>
+            Edit
+          </Button>,
         ]}
-        onClick={() => navigate(`/users/${user.id}`)}
       >
         <Card.Meta avatar={<Avatar src={user.avatar} />} title={user.firstName + " " + user.lastName} />
-        <div style={{ marginBottom: 8, marginTop: 24 }}>
+        <div style={{ marginBottom: 8, marginTop: 24 }} onClick={() => navigate(`/users/${user.id}`)}>
           <b>Email: </b> {user.email}
         </div>
         <div style={{ marginBottom: 8 }}>

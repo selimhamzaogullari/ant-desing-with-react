@@ -96,7 +96,7 @@ const productSlice = createSlice({
       })
       // Update Product
       .addCase(updateProduct.pending, (state) => {
-        state.loading = true;
+        // state.loading = true;
         state.error = null;
       })
       .addCase(updateProduct.fulfilled, (state) => {

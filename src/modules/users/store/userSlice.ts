@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import type { CreateUser, UserInitialState } from "../type";
+import type { CreateUser, User, UserInitialState } from "../type";
 import { userApi } from "../api/userApi";
 
 const initialState: UserInitialState = {
@@ -26,6 +26,11 @@ export const deleteUser = createAsyncThunk("api/deleteUser", async (id: string) 
 
 export const createUser = createAsyncThunk("api/createUser", async (newUser: CreateUser) => {
   const response = await userApi.addUser(newUser);
+  return response.data;
+});
+
+export const updateUser = createAsyncThunk("api/updateUser", async (userData: User) => {
+  const response = await userApi.editUser(userData);
   return response.data;
 });
 
@@ -81,6 +86,18 @@ const userSlice = createSlice({
         state.error = null;
       })
       .addCase(createUser.rejected, (state, action) => {
+        (state.loading = false), (state.error = action.error.message || "Error");
+      })
+      // Update Product
+      .addCase(updateUser.pending, (state) => {
+        // state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateUser.fulfilled, (state) => {
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(updateUser.rejected, (state, action) => {
         (state.loading = false), (state.error = action.error.message || "Error");
       });
   },

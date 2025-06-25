@@ -10,6 +10,7 @@ import UserDetail from "./modules/users/pages/UserDetailPage";
 import CreateUser from "./modules/users/pages/CreateUserPage";
 import CreateProduct from "./modules/products/pages/CreateProductPage";
 import EditProduct from "./modules/products/pages/EditProductPage";
+import EditUser from "./modules/users/pages/EditUserPage";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="products/create" element={<CreateProduct />} />
             <Route path="users/create" element={<CreateUser />} />
             <Route path="products/edit/:id" element={<EditProduct />} />
+            <Route path="users/edit/:id" element={<EditUser />} />
           </Route>
         </Routes>
       </Router>
